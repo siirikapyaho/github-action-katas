@@ -25,3 +25,9 @@ jobs:
     needs: [Build]
     permissions:
       packages: write
+    steps:
+      - name: Build Docker
+        run: ci/build-docker.sh
+      - name: Push Docker
+        run: ci/push-docker.sh
+
