@@ -19,15 +19,18 @@ jobs:
         uses: actions/upload-artifact@v3
         with: 
           name: code
-          path: app/build/libs/app-0.1-all.jar
+          path: .
   Docker-image:
     runs-on: ubuntu-latest
     needs: [Build]
     permissions:
       packages: write
     steps:
-      - name: Clone-down
-        uses: actions/checkout@v3
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with: 
+          name: code
+          path: .
       - name: Build Docker
         run: ci/build-docker.sh
       - name: Push Docker
